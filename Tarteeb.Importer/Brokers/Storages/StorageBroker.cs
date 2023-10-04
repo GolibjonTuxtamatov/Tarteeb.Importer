@@ -28,6 +28,9 @@ namespace Tarteeb.Importer.Brokers.Storages
         public IQueryable<Client> SelectAllClients() =>
             this.Clients.AsQueryable();
 
+        public async Task<Client> SelectClientById(Guid clientId) =>
+            await this.Clients.FindAsync(clientId);
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             string connectionString = "Data Source = ../../../Tarteeb.db";
