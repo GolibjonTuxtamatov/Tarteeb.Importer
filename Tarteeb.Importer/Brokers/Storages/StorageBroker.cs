@@ -12,6 +12,9 @@ namespace Tarteeb.Importer.Brokers.Storages
 {
     internal class StorageBroker : EFxceptionsContext
     {
+        public StorageBroker() =>
+           this.Database.EnsureCreated();
+
         public DbSet<Client> Clients { get; set; }
 
         public async Task<Client> InsertClientAsync(Client client)
@@ -21,6 +24,9 @@ namespace Tarteeb.Importer.Brokers.Storages
 
             return client;
         }
+
+        public IQueryable<Client> SelectAllClients() =>
+            this.Clients.AsQueryable();
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
